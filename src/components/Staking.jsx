@@ -322,7 +322,7 @@ const [active, setActive] = useState("1");
           </header> */}
       <nav className="main-nav">
       <div className="logo">
-        <img src={logo} alt="img" />
+        <a target="__blank" href='https://noe-global.com/'><img src={logo} alt="img" /></a>
       </div>
       <div className={isOpen ? " mobile-menu-link" : "menu-link"}>
         {/* <div className="flex">
@@ -425,7 +425,6 @@ const [active, setActive] = useState("1");
                   <button className={`btn_primary nonactivebutton ${buttonactive4} daysbtn`} onClick={() =>{setApy(45); setPoolId(3); setButtonactive4("activebutton"); setButtonactive1(""); setButtonactive3(""); setButtonactive2("")}}>
                     60 Days
                   </button>
-
                 </div>
                   <div className='showerror'>{errors}</div>
 
@@ -470,7 +469,7 @@ const [active, setActive] = useState("1");
               </div>
               <div className="right card">
                 <div className="rightinner">
-                  <p className="big">{mystakebalance}</p>
+                  <p className="big">${(mystakebalance)?mystakebalance:0.00}</p>
                   <p>Total Valued Locked</p>
                 </div>
                 <hr />
