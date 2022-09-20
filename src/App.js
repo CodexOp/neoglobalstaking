@@ -13,10 +13,10 @@ import Staking from "./components/Staking";
 function App() {
 
   const BSCchain = {
-    id: 97,
-    name: "BSC test",
-    network: "BSC test",
-    iconUrl: "https://www.logo.wine/a/logo/Binance/Binance-Icon-Logo.wine.svg",
+    id: 56,
+    name: "BSC",
+    network: "BSC",
+    iconUrl: "https://user-images.githubusercontent.com/12424618/54043975-b6cdb800-4182-11e9-83bd-0cd2eb757c6e.png",
     iconBackground: "#fff",
     nativeCurrency: {
       decimals: 18,
@@ -24,43 +24,23 @@ function App() {
       symbol: "BNB",
     },
     rpcUrls: {
-      default: "https://bsctestapi.terminet.io/rpc",
+      default: "https://bsc-dataseed.binance.org/",
     },
     blockExplorers: {
-      default: { name: "SnowTrace", url: "https://bscscan.com" },
-      etherscan: { name: "SnowTrace", url: "https://bscscan.com" },
+      default: { name: "bscScan", url: "https://bscscan.com" },
+      etherscan: { name: "bscScan", url: "https://bscscan.com" },
     },
     testnet: false,
   };
 
-  const Avaxchain = {
-    id: 43114,
-    name: "Avalanche Network",
-    network: "Avalanche Network",
-    iconUrl: "https://cryptologos.cc/logos/avalanche-avax-logo.png",
-    iconBackground: "#fff",
-    nativeCurrency: {
-      decimals: 18,
-      name: "Avalanche",
-      symbol: "AVAX",
-    },
-    rpcUrls: {
-      default: "https://rpc.ankr.com/avalanche",
-    },
-    blockExplorers: {
-      default: { name: "SnowTrace", url: "https://snowtrace.io/" },
-      etherscan: { name: "SnowTrace", url: "https://snowtrace.io/" },
-    },
-    testnet: false,
-  };
 
   const { chains, provider } = configureChains(
-    [chain.rinkeby, BSCchain, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+    [BSCchain, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
     [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
   );
 
   const { connectors } = getDefaultWallets({
-    appName: "baby-cracken",
+    appName: "NOE",
     chains,
   });
   const wagmiClient = createClient({
