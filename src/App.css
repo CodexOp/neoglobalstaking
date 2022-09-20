@@ -212,8 +212,9 @@ font-family: 'Poppins';
   text-align: center;
   width: 100%;
   background: #B00020;
-  margin-top: 20px;
+  margin-top: 5px;
   border-radius: 50px;
+  padding: 5px;
 }
 
 .progressbar-container{
@@ -439,6 +440,10 @@ font-family: 'Poppins';
 
   .days button {
     font-size: 12px;
+  }
+
+  .left, .right{
+    width: 90% !important;
   }
 
   .btn_primary {

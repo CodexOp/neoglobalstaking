@@ -23,7 +23,7 @@ const [active, setActive] = useState("1");
     setActive(event.target.id);
   };
 
-    const [apy, setApy] = useState(0);
+    const [apy, setApy] = useState(10);
     const { data: signer, isError, isLoading } = useSigner()
     const provider = useProvider();
 
@@ -68,7 +68,7 @@ const [active, setActive] = useState("1");
     useEffect(()=>{
       refreshData(signer)
       
-    },[signer, poolId])
+    },[signer, poolId, claimableTokens])
 
     function refreshData (signer) {
       if(signer){
@@ -86,6 +86,7 @@ const [active, setActive] = useState("1");
 
         async function getPoolInfo (){
             try{
+              
               var _poolInfo = await staking.poolInfo(poolId);
               console.log ("Pool Info: ", _poolInfo);
               console.log ("Emergency Fees: ", _poolInfo.emergencyFees.toString());
@@ -96,17 +97,15 @@ const [active, setActive] = useState("1");
               const currrentpoolsizeConverted = Math.floor(ethers.utils.formatEther(currrentpoolsize))
               const maxpool = await _poolInfo.maxPoolSize.toString()
               const maxpoolConverted = ethers.utils.formatEther(maxpool)
-              const currentreward = await _poolInfo.reward.toString()
               const lockDays = await _poolInfo.lockDays.toString();
               setPoolInfo(_poolInfo);
               setEmergencyfee(emergencywithdrawfee);
               setPoolSize(currrentpoolsizeConverted);
-              setReward(currentreward)
               setLockTime(lockDays)
               setMaxPool(maxpoolConverted)
               setMaxContribution(maxcontributionconverted)
               console.log("maxpool" + maxpoolConverted)
-              console.log("current pool" + currrentpoolsizeConverted)
+              console.log("current pools" + currrentpoolsizeConverted)
 
 
             }catch(err){
@@ -130,7 +129,7 @@ const [active, setActive] = useState("1");
               let userAddress = await signer.getAddress();
               let _claimableTokens = await staking.claimableRewards(poolId, userAddress);
               console.log("Claimable Tokens: ", _claimableTokens.toString());
-              setClaimableTokens(ethers.utils.formatUnits(_claimableTokens, 6).toString());
+              setClaimableTokens(ethers.utils.formatUnits(_claimableTokens, 18).toString());
             }catch (error){
               console.log("Claimable error", error);
             }
@@ -210,7 +209,7 @@ const [active, setActive] = useState("1");
               }catch (error) {
                 console.log (error);
                 try {
-                  setError(error.error.data.message)
+                  setError(error.error.message)
                 } catch {
                   setError("Something went wrong, please try again!")
                 }
@@ -222,7 +221,7 @@ const [active, setActive] = useState("1");
           }
           async function claimtoken () {
               try{
-                  let tx = await staking.claimTokens(poolId);
+                  let tx = await staking.claimRewards(poolId);
                   let reciept = await tx.wait();
                   console.log ("ClaimToken: ", reciept);
                   refreshData(signer)
@@ -230,7 +229,7 @@ const [active, setActive] = useState("1");
               catch (error) {
                 console.log (error);
                 try {
-                  setError(error.error.data.message)
+                  setError(error.error.message)
                 } catch {
                   setError("Something went wrong, please try again!")
                 }
@@ -247,7 +246,7 @@ const [active, setActive] = useState("1");
             }catch (error) {
               console.log (error);
               try {
-                setError(error.error.data.message)
+                setError(error.error.message)
               } catch {
                 setError("Something went wrong, please try again!")
               }
@@ -265,11 +264,10 @@ const [active, setActive] = useState("1");
               let tx = await _staking.emergencyWithdraw(poolId);
               let reciept = await tx.wait();
               console.log ("Emergency Withdraw Tx Receipt: ", reciept);
-              refreshData(signer)
             }catch (error) {
-              console.log ("eeoeoeo", error.toString());
+              console.log ("emergency withdraw error", error.error);
               try {
-                setError(error.error.data.message)
+                setError(error.error.message)
               } catch {
                 setError("Something went wrong, please try again!")
               }
@@ -398,7 +396,7 @@ const [active, setActive] = useState("1");
               <div className="info">
                 <h1 className="infoHeading">Staking</h1>
                 <p className="infoPara">
-                Stake your Babykrakens and earn up to 18% APY interest with our cutting edge staking platform providing you full control over your investment.
+                Stake your NEO and earn up to 18% APY interest with our cutting edge staking platform providing you full control over your investment.
 
                 </p>
               </div>
@@ -407,7 +405,6 @@ const [active, setActive] = useState("1");
               <div className="left card">
                 <div className="heading">
                   <h2>Participate in our Stake</h2>
-                  <p><span>245.65</span> Token Value </p>
                 </div>
                 <div className="days">
                   <button
@@ -426,19 +423,27 @@ const [active, setActive] = useState("1");
                     60 Days
                   </button>
                 </div>
-                  <div className='showerror'>{errors}</div>
+                <Progress color="#339CEE" completed={(parseFloat(poolsize)* 100)/parseFloat(maxpool)} height={30} data-label={`${(parseFloat(poolsize)* 100)/parseFloat(maxpool)}% Pool Filled`} />
+
+                  {errors ? <div className='showerror'>{errors}</div>:<></>}
 
                 <div className="bal-info">
                   <div className="bal-left">
-                  {/* <Progress color="#339CEE" completed={(parseFloat(poolsize)* 100)/parseFloat(maxpool)} height={30} data-label={`${(parseFloat(poolsize)* 100)/parseFloat(maxpool)}% Pool Filled`} /> */}
 
                     <div>
                       My Balance : <span> {myTokenBalance}</span> <br />
                     </div>
                     <div>
-                    Total Tokens Locked : <span>{poolsize} </span>
+                    Total Tokens Locked : <span>{poolsize} Token</span>
                       <br />
                     </div>
+                    <div>
+                      Max Contribution: <span>{maxContribution} Token</span>
+                    </div>
+                    <div>
+                      Max PoolSize: <span>{maxpool} Token</span>
+                    </div>
+                    
                     <div>
                       Lock Deadline : <span>{locktime} Days</span> <br />
                     </div>
@@ -448,10 +453,11 @@ const [active, setActive] = useState("1");
                     <div>
                       Unstake fee: <span>{emergencyfee/10}%</span>
                     </div>
+                  
                   </div>
                   <div className="bal-right">
                     <span id="apy">APY</span>
-                    {((parseInt(reward)* 365)/(locktime* 10)).toFixed(2)}% <br />
+                    {apy}% <br />
                   </div>
                 </div>
                 <hr />
@@ -469,21 +475,20 @@ const [active, setActive] = useState("1");
               </div>
               <div className="right card">
                 <div className="rightinner">
-                  <p className="big">${(mystakebalance)?mystakebalance:0.00}</p>
-                  <p>Total Valued Locked</p>
+                  <p className="big">{(mystakebalance)?mystakebalance:0.00}</p>
+                  <p>My Total Token Locked</p>
                 </div>
                 <hr />
                 <div className="rightinner">
-                  {/* <p className="big">{parseFloat(claimableTokens).toFixed(2)} USDC</p> */}
-                  <p className='big'>200%</p>
-                  <p>APY</p>
-                  {/* <button onClick={claimtoken} className="claimtoken">Claim Tokens</button> */}
+                  <p className="big">{parseFloat(claimableTokens).toFixed(2)} TToken</p>
+                  {/* <p className='big'>200%</p>
+                  <p>APY</p> */}
+                  <button onClick={claimtoken} className="claimtoken">Claim Tokens</button>
                 </div>
                 <hr />
                 <div className="rightinner">
-                  {/* <p className="big">{unlockTime}</p> */}
-                  <p className='big'>6975</p>
-                  <p>Stake Holders</p>
+                  <p className="big">{unlockTime}</p>
+                  <p>Unlock Time</p>
                 </div>
               </div>
             </div>
