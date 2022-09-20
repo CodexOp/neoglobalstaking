@@ -112,6 +112,10 @@ background: linear-gradient(90deg, #49A5D3 0.15%, #7CF0B2 100.15%) !important;
     padding-bottom: 10px;
 }
 
+.navbarul{
+    padding: 25px 0;
+}
+
 .navbarul li {
     padding-bottom: 5px !important;
 
