@@ -209,7 +209,7 @@ const [active, setActive] = useState("1");
               }catch (error) {
                 console.log (error);
                 try {
-                  setError(error.error.message)
+                  setError(error.error.data.message)
                 } catch {
                   setError("Something went wrong, please try again!")
                 }
@@ -229,7 +229,7 @@ const [active, setActive] = useState("1");
               catch (error) {
                 console.log (error);
                 try {
-                  setError(error.error.message)
+                  setError(error.error.data.message)
                 } catch {
                   setError("Something went wrong, please try again!")
                 }
@@ -246,7 +246,7 @@ const [active, setActive] = useState("1");
             }catch (error) {
               console.log (error);
               try {
-                setError(error.error.message)
+                setError(error.error.data.message)
               } catch {
                 setError("Something went wrong, please try again!")
               }
@@ -267,7 +267,7 @@ const [active, setActive] = useState("1");
             }catch (error) {
               console.log ("emergency withdraw error", error.error);
               try {
-                setError(error.error.message)
+                setError(error.error.data.message)
               } catch {
                 setError("Something went wrong, please try again!")
               }
