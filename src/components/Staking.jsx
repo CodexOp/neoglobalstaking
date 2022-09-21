@@ -11,7 +11,13 @@ import Progress from 'react-progressbar';
 import './Navbar.css';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
-
+import {BsGlobe} from 'react-icons/bs'
+import {BsInstagram} from 'react-icons/bs'
+import {BsYoutube} from 'react-icons/bs'
+import {BsFacebook} from 'react-icons/bs'
+import {AiFillTwitterCircle} from 'react-icons/ai'
+import {BsTelegram} from 'react-icons/bs'
+import {FaMedium} from 'react-icons/fa'
 
 
 const Staking = () => {  
@@ -399,7 +405,7 @@ const [active, setActive] = useState("1");
               <div className="info">
                 <h1 className="infoHeading">Staking</h1>
                 <p className="infoPara">
-                Stake your NOE and earn up to 18% APY interest with our cutting edge staking platform providing you full control over your investment.
+                Stake your NOE and earn up to 69% APY interest with our cutting edge staking platform providing you full control over your investment.
 
                 </p>
               </div>
@@ -495,8 +501,19 @@ const [active, setActive] = useState("1");
                 </div>
               </div>
             </div>
+            <div className='socials'>
+          <a href='https://noe-global.com/' target="_blank" rel="noreferrer"><BsGlobe className='socialIcon'/></a>
+          <a href='https://www.instagram.com/noe_global_finance/' target="_blank" rel="noreferrer"><BsInstagram className='socialIcon'/></a>
+          <a href='https://www.youtube.com/channel/UCd4O3c3jjzkgcbCOqB5Lkjw' target="_blank" rel="noreferrer"><BsYoutube className='socialIcon'/></a>
+          <a href='https://www.facebook.com/noecryptobank' target="_blank" rel="noreferrer"><BsFacebook className='socialIcon'/></a>
+          <a href='https://twitter.com/NoeCryptobank' target="_blank" rel="noreferrer"><AiFillTwitterCircle className='socialIcon'/></a>
+          <a href='https://t.me/noecryptobankchat' target="_blank" rel="noreferrer"><BsTelegram className='socialIcon'/></a>
+          <a href='https://medium.com/@noebank' target="_blank" rel="noreferrer"><FaMedium className='socialIcon'/></a>
+          </div>
           </section>
+        
         </div>
+      
   )
 }
 

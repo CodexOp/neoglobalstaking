@@ -207,6 +207,33 @@ font-family: 'Poppins';
 }
 
 
+.socialIcon{
+  color: #fff;
+  font-size: 30px;
+  animation: all 0.2s ease-in-out;
+}
+.socialIcon:hover{
+  font-size: 34px;
+
+}
+
+.socials{
+  display: flex;
+  justify-content: center;
+  gap:20px;
+  padding: 20px 0;
+  background: #293280;
+
+}
+
+@media(max-width:400px){
+  
+.socialIcon{
+  color: #fff;
+  font-size: 24px;
+  animation: all 0.2s ease-in-out;
+}
+}
 
 .showerror{
   text-align: center;
