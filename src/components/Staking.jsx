@@ -396,7 +396,7 @@ const [active, setActive] = useState("1");
               <div className="info">
                 <h1 className="infoHeading">Staking</h1>
                 <p className="infoPara">
-                Stake your NEO and earn up to 18% APY interest with our cutting edge staking platform providing you full control over your investment.
+                Stake your NOE and earn up to 18% APY interest with our cutting edge staking platform providing you full control over your investment.
 
                 </p>
               </div>
@@ -411,16 +411,16 @@ const [active, setActive] = useState("1");
                     className={`btn_primary nonactivebutton ${buttonactive1} daysbtn`}
                     style={{buttonactive1}}
                     onClick={() => {setApy(10); setPoolId(0); setButtonactive1("activebutton"); setButtonactive2(""); setButtonactive3(""); setButtonactive4("")}}>
-                    7 Days
+                    BRONZE
                   </button>
-                  <button className={`btn_primary nonactivebutton ${buttonactive2} daysbtn`} onClick={() => {setApy(15); setPoolId(1); setButtonactive2("activebutton"); setButtonactive1(""); setButtonactive3(""); setButtonactive4("")} }>
-                    14 Days
+                  <button className={`btn_primary nonactivebutton ${buttonactive2} daysbtn`} onClick={() => {setApy(22); setPoolId(1); setButtonactive2("activebutton"); setButtonactive1(""); setButtonactive3(""); setButtonactive4("")} }>
+                  SILVER
                   </button>
-                  <button className={`btn_primary nonactivebutton ${buttonactive3} daysbtn`} onClick={() =>{setApy(30); setPoolId(2); setButtonactive3("activebutton"); setButtonactive1(""); setButtonactive2(""); setButtonactive4("")}}>
-                    30 Days
+                  <button className={`btn_primary nonactivebutton ${buttonactive3} daysbtn`} onClick={() =>{setApy(45); setPoolId(2); setButtonactive3("activebutton"); setButtonactive1(""); setButtonactive2(""); setButtonactive4("")}}>
+                  GOLDEN
                   </button>
-                  <button className={`btn_primary nonactivebutton ${buttonactive4} daysbtn`} onClick={() =>{setApy(45); setPoolId(3); setButtonactive4("activebutton"); setButtonactive1(""); setButtonactive3(""); setButtonactive2("")}}>
-                    60 Days
+                  <button className={`btn_primary nonactivebutton ${buttonactive4} daysbtn`} onClick={() =>{setApy(69); setPoolId(3); setButtonactive4("activebutton"); setButtonactive1(""); setButtonactive3(""); setButtonactive2("")}}>
+                  PLATINUM
                   </button>
                 </div>
                 <Progress color="#339CEE" completed={(parseFloat(poolsize)* 100)/parseFloat(maxpool)} height={30} data-label={`${(parseFloat(poolsize)* 100)/parseFloat(maxpool)}% Pool Filled`} />
@@ -434,14 +434,14 @@ const [active, setActive] = useState("1");
                       My Balance : <span> {myTokenBalance}</span> <br />
                     </div>
                     <div>
-                    Total Tokens Locked : <span>{poolsize} Token</span>
+                    Total Tokens Locked : <span>{poolsize} NOE</span>
                       <br />
                     </div>
                     <div>
-                      Max Contribution: <span>{maxContribution} Token</span>
+                      Max Contribution: <span>{maxContribution} NOE</span>
                     </div>
                     <div>
-                      Max PoolSize: <span>{maxpool} Token</span>
+                      Max PoolSize: <span>{maxpool} NOE</span>
                     </div>
                     
                     <div>
@@ -475,7 +475,7 @@ const [active, setActive] = useState("1");
               </div>
               <div className="right card">
                 <div className="rightinner">
-                  <p className="big">{(mystakebalance)?mystakebalance:0.00}</p>
+                  <p className="big">{(mystakebalance)?mystakebalance:0.00} NOE</p>
                   <p>My Total Token Locked</p>
                 </div>
                 <hr />
