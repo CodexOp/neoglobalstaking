@@ -66,16 +66,17 @@ const [active, setActive] = useState("1");
     const [errors, setError] = useState()
 
     useEffect(()=>{
+      getPoolInfo() 
       refreshData(signer)
-      
+
     },[signer, poolId, claimableTokens])
 
     function refreshData (signer) {
+
       if(signer){
         signer.getAddress().then((res)=>{setMyaddress(res)})
         getUserInfo()
         getUserLockTime()
-        getPoolInfo()
         getTokenBalance()
         getWhiteListAddresses()
         checkApproved()
@@ -86,8 +87,10 @@ const [active, setActive] = useState("1");
 
         async function getPoolInfo (){
             try{
-              
-              var _poolInfo = await staking.poolInfo(poolId);
+              let rpcUrl = value.rpcURl;
+              let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+              let stake_temp = new ethers.Contract(value.stakingAddress, stakingAbi, provider_);
+              var _poolInfo = await stake_temp.poolInfo(poolId);
               console.log ("Pool Info: ", _poolInfo);
               console.log ("Emergency Fees: ", _poolInfo.emergencyFees.toString());
               const emergencywithdrawfee = await _poolInfo.emergencyFees.toString()
@@ -97,11 +100,11 @@ const [active, setActive] = useState("1");
               const currrentpoolsizeConverted = Math.floor(ethers.utils.formatEther(currrentpoolsize))
               const maxpool = await _poolInfo.maxPoolSize.toString()
               const maxpoolConverted = ethers.utils.formatEther(maxpool)
-              const lockDays = await _poolInfo.lockDays.toString();
+              const lockDayss = await _poolInfo.lockDays.toString();
               setPoolInfo(_poolInfo);
               setEmergencyfee(emergencywithdrawfee);
               setPoolSize(currrentpoolsizeConverted);
-              setLockTime(lockDays)
+              setLockTime(lockDayss)
               setMaxPool(maxpoolConverted)
               setMaxContribution(maxcontributionconverted)
               console.log("maxpool" + maxpoolConverted)

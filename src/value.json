@@ -1,5 +1,6 @@
 {
     "stakingAddress": "0x93F14F74eda31874D25191A1bB41a21DC7987833",
-    "stakingToken": "0xBbE626Be0abD64e8efd72A934F08ff9E81C909c8"
+    "stakingToken": "0xBbE626Be0abD64e8efd72A934F08ff9E81C909c8",
+    "rpcURl":"https://bsc-dataseed.binance.org/"
     
 }
