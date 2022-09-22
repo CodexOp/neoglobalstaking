@@ -23,7 +23,7 @@ import {FaMedium} from 'react-icons/fa'
 const Staking = () => {  
 
   const [isOpen, setOpen] = useState(false);
-const [active, setActive] = useState("1");
+const [active, setActive] = useState("0");
 
   const handleClick = (event) => {
     setActive(event.target.id);
@@ -342,6 +342,16 @@ const [active, setActive] = useState("1");
         <ul className="navbarul">
           <li>
             <a
+              className={active === "0" ? "actived" : ""}
+              href="#"
+              id={"0"}
+              onClick={handleClick}
+            >
+              Earn
+            </a>
+          </li>
+          <li>
+            <a
               className={active === "1" ? "actived" : ""}
               href="#"
               id={"1"}
@@ -474,7 +484,7 @@ const [active, setActive] = useState("1");
                   <div className="bal-right">
                     <span id="apy">APY</span>
                     {apy}% <br />
-                  </div>
+                  </div>  
                 </div>
                 <hr />
                 <div className="user-input">
@@ -496,7 +506,7 @@ const [active, setActive] = useState("1");
                 </div>
                 <hr />
                 <div className="rightinner">
-                  <p className="big">{parseFloat(claimableTokens).toFixed(2)} TToken</p>
+                  <p className="big">{parseFloat(claimableTokens).toFixed(2)} Token</p>
                   {/* <p className='big'>200%</p>
                   <p>APY</p> */}
                   <button onClick={claimtoken} className="claimtoken">Claim Tokens</button>
@@ -508,6 +518,10 @@ const [active, setActive] = useState("1");
                 </div>
               </div>
             </div>
+            <div className='Footer'>
+              <div className='policy'>
+              <p>All rights réserve NOE GLOBAL 2022 </p>
+              </div>
             <div className='socials'>
           <a href='https://noe-global.com/' target="_blank" rel="noreferrer"><BsGlobe className='socialIcon'/></a>
           <a href='https://www.instagram.com/noe_global_finance/' target="_blank" rel="noreferrer"><BsInstagram className='socialIcon'/></a>
@@ -516,6 +530,10 @@ const [active, setActive] = useState("1");
           <a href='https://twitter.com/NoeCryptobank' target="_blank" rel="noreferrer"><AiFillTwitterCircle className='socialIcon'/></a>
           <a href='https://t.me/noecryptobankchat' target="_blank" rel="noreferrer"><BsTelegram className='socialIcon'/></a>
           <a href='https://medium.com/@noebank' target="_blank" rel="noreferrer"><FaMedium className='socialIcon'/></a>
+          </div>
+          <div className='info_more'>
+                <p>More infos : <a href="mailto:contact@noe-global.com">contact@noe-global.com</a></p>
+                </div>
           </div>
           </section>
         

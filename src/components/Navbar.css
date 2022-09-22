@@ -14,6 +14,57 @@ html {
     height: auto;
 }
 
+.Footer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: #293280;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.socials{
+width: 40%;
+}
+
+.policy{
+    width: 30%;
+    text-align: left;
+    font-size: 16px;
+
+}
+
+.info_more{
+    width: 30%;
+    text-align: right;
+    font-size: 16px;
+
+}
+
+@media(max-width:1000px){
+    .Footer{
+        flex-direction: column;
+        padding: 20px 0;
+    }
+    .socials{
+        width: 100%;
+        }
+        
+        .policy{
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+        
+        }
+        
+        .info_more{
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+        
+        }
+}
+
 .menu-link ul {
     font-family: 'Poppins';
     font-style: normal;
