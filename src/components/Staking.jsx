@@ -68,6 +68,7 @@ const [active, setActive] = useState("1");
     const [buttonactive4, setButtonactive4] = useState("")
     const [maxtoken, setMaxToken] = useState(0)
     const [maxContribution, setMaxContribution] = useState(0)
+    const [minContribution, setMinContribution] = useState(0)
     const [claimableTokens, setClaimableTokens] = useState(0)
     const [errors, setError] = useState()
 
@@ -103,11 +104,14 @@ const [active, setActive] = useState("1");
               const currrentpoolsize = await _poolInfo.currentPoolSize.toString()
               const maxcontribution = await _poolInfo.maxContribution.toString()
               const maxcontributionconverted = ethers.utils.formatEther(maxcontribution)
+              const minicontribution = await _poolInfo.minContribution.toString()
+              const minicontributionconverted = ethers.utils.formatEther(minicontribution)
               const currrentpoolsizeConverted = Math.floor(ethers.utils.formatEther(currrentpoolsize))
               const maxpool = await _poolInfo.maxPoolSize.toString()
               const maxpoolConverted = ethers.utils.formatEther(maxpool)
               const lockDayss = await _poolInfo.lockDays.toString();
               setPoolInfo(_poolInfo);
+              setMinContribution(minicontributionconverted)
               setEmergencyfee(emergencywithdrawfee);
               setPoolSize(currrentpoolsizeConverted);
               setLockTime(lockDayss)
@@ -450,6 +454,9 @@ const [active, setActive] = useState("1");
                       Max Contribution: <span>{maxContribution} NOE</span>
                     </div>
                     <div>
+                      Min Contribution: <span>{minContribution} NOE</span>
+                    </div>
+                    <div>
                       Max PoolSize: <span>{maxpool} NOE</span>
                     </div>
                     
@@ -460,7 +467,7 @@ const [active, setActive] = useState("1");
                       Max Contribution : <span>{maxContribution}</span> <br />
                     </div> */}
                     <div>
-                      Unstake fee: <span>{emergencyfee/10}%</span>
+                      Withdraw fee: <span>{emergencyfee/10}%</span>
                     </div>
                   
                   </div>
