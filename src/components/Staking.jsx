@@ -23,7 +23,7 @@ import {FaMedium} from 'react-icons/fa'
 const Staking = () => {  
 
   const [isOpen, setOpen] = useState(false);
-const [active, setActive] = useState("0");
+const [active, setActive] = useState("-1");
 
   const handleClick = (event) => {
     setActive(event.target.id);
@@ -342,6 +342,16 @@ const [active, setActive] = useState("0");
         <ul className="navbarul">
           <li>
             <a
+              className={active === "-1" ? "actived" : ""}
+              href="#"
+              id={"-1"}
+              onClick={handleClick}
+            >
+              Staking
+            </a>
+          </li>
+          <li>
+            <a
               className={active === "0" ? "actived" : ""}
               href="#"
               id={"0"}
@@ -520,7 +530,7 @@ const [active, setActive] = useState("0");
             </div>
             <div className='Footer'>
               <div className='policy'>
-              <p>All rights réserve NOE GLOBAL 2022 </p>
+              <p>All rights reserved NOE GLOBAL 2022 </p>
               </div>
             <div className='socials'>
           <a href='https://noe-global.com/' target="_blank" rel="noreferrer"><BsGlobe className='socialIcon'/></a>
