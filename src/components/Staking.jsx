@@ -29,6 +29,10 @@ const [active, setActive] = useState("-1");
     setActive(event.target.id);
   };
 
+    const totalTransactionDone = 0;
+    const totalTransactionAmount = 0;
+
+
     const [apy, setApy] = useState(10);
     const { data: signer, isError, isLoading } = useSigner()
     const provider = useProvider();
@@ -215,7 +219,18 @@ const [active, setActive] = useState("-1");
                   let _amount = ethers.utils.parseEther(amount.toString());
                   // console.log (_amount)
                   let tx = await staking.stakeTokens(poolId, _amount);
+
+
+
                   let reciept = await tx.wait();
+                  // below code will run if transaction is complete otherwise it will be skipped
+                  totalTransactionAmount = amount;
+                  totalTransactionDone += 1;
+
+                  // PostDataToDatabase(); add this function here for post
+                  
+
+
                   console.log ("Stake Tx Receipt: ", reciept);
                   refreshData(signer)
                 }              
