@@ -10,7 +10,7 @@ import stakingAbi from '../stakingAbi.json'
 import Progress from 'react-progressbar';
 import './Navbar.css';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { NavLink } from "react-router-dom";
+import { json, NavLink } from "react-router-dom";
 import {BsGlobe} from 'react-icons/bs'
 import {BsInstagram} from 'react-icons/bs'
 import {BsYoutube} from 'react-icons/bs'
@@ -24,6 +24,8 @@ const Staking = () => {
 
   const [isOpen, setOpen] = useState(false);
 const [active, setActive] = useState("-1");
+const [totalTransactionDoneState, setTokalTransactionDone] = useState(0)
+const [totalAmounttrans, setTotalAmount] = useState(0)
 
   const handleClick = (event) => {
     setActive(event.target.id);
@@ -79,6 +81,7 @@ const [active, setActive] = useState("-1");
     useEffect(()=>{
       getPoolInfo() 
       refreshData(signer)
+      getDBValue()
 
     },[signer, poolId, claimableTokens])
 
@@ -94,7 +97,39 @@ const [active, setActive] = useState("-1");
         getClaimableTokens()
       }
     }
+
+  
+
+    async function getDBValue(){
+      try{
+        await fetch('https://drab-lime-scorpion-wrap.cyclic.app/api/transaction/getTransactions').then((res)=>{
+          res.json().then((data) => {
+            setTokalTransactionDone(data.totalTransactions);
+            setTotalAmount(data.totalAmount)
+          });
+      })
+      }
+      catch(er){
+        console.log(er)
+      }
+    }
     
+    async function updateDBdata(amount){
+      try{
+        fetch('https://drab-lime-scorpion-wrap.cyclic.app/api/transaction/addTransaction', {  // Enter your IP address here
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'}, 
+        mode: 'cors', 
+        body: JSON.stringify({
+          amount:parseInt(amount)
+        }) // body data type must match "Content-Type" header
+  
+      })
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
 
         async function getPoolInfo (){
             try{
@@ -209,6 +244,7 @@ const [active, setActive] = useState("-1");
           }
         
           async function stakeTokens () {
+
             // if(walletAddressInfo){
               try{
                 if(amount === undefined){
@@ -228,8 +264,8 @@ const [active, setActive] = useState("-1");
                   totalTransactionDone += 1;
 
                   // PostDataToDatabase(); add this function here for post
-                  
 
+                  updateDBdata(amount)
 
                   console.log ("Stake Tx Receipt: ", reciept);
                   refreshData(signer)
@@ -525,6 +561,16 @@ const [active, setActive] = useState("-1");
                 </div>
               </div>
               <div className="right card">
+              
+                <div className="rightinner">
+                  <p className="big">{totalTransactionDoneState}</p>
+                  <p>Total Transaction Done</p>
+                </div> <hr />
+                <div className="rightinner">
+                  <p className="big">{totalAmounttrans} NOE</p>
+                  <p>Total Amount Transact</p>
+                </div>
+                <hr></hr>
                 <div className="rightinner">
                   <p className="big">{(mystakebalance)?mystakebalance:0.00} NOE</p>
                   <p>My Total Token Locked</p>

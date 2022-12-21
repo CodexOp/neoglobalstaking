@@ -348,7 +348,7 @@ font-family: 'Poppins';
   padding: 40px;
 }
 .right p{
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 32px;
   max-width: 530px;
@@ -359,10 +359,10 @@ font-family: 'Poppins';
     color: #99F3FF;
 }
 .right .big{
-  font-size: 37px;
+  font-size: 27px;
   font-weight: 700;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 /* .container{
